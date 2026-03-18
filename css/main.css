@@ -1,3 +1,39 @@
 @import "./reset.css";
 @import "./common.css";
 @import "./wiki-layout.css";
+
+body {
+  /* 전체 페이지의 폰트를 살짝 부드럽게 조정 */
+  letter-spacing: -0.5px; 
+}
+
+#gallery {
+  /* 갤러리 섹션(#gallery)에만 연한 회색 배경과 둥근 모서리 적용 */
+  background-color: #f8faf9;
+  padding: 30px;
+  border-radius: 12px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3칸으로 일정하게 나눔 */
+  gap: 12px; /* 사진 사이 간격 */
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 정사각형 비율 강제 유지 */
+  object-fit: cover; /* 이미지가 찌그러지지 않게 꽉 채움 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 부드러운 애니메이션 */
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05); /* 마우스 올리면 1.05배 확대 */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  z-index: 10;
+}
+
+:root {
+  --primary-color: #4A90E2; /* 산뜻한 블루 컬러로 변경 */
+}
