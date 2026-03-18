@@ -2,56 +2,45 @@
 @import "./common.css";
 @import "./wiki-layout.css";
 
-/* --- 1. 전체 배경 및 기본 폰트 (태그 선택자) --- */
+/* --- 1. 전체 배경 및 기본 폰트 --- */
 body {
-  /* Haneul-haneul한 파스텔 하늘색 배경 */
   background-color: #f0f8ff; 
   font-family: 'Noto Sans KR', 'Jua', sans-serif;
   letter-spacing: -0.3px;
   color: #444; 
 }
 
-/* --- 2. 최상단 프로필 영역 (크기 줄이기 & 배경색 해결) --- */
-
-/* 프로필 히어로 전체 컨테이너 (.hero) */
+/* --- 2. 최상단 프로필 영역 (가로 길이 & 배경 최적화) --- */
 .hero {
   display: flex;
   justify-content: center;
-  /* 위아래 여백을 줄여 전체적인 부피감 감소 */
-  padding: 50px 32px; 
-  
-  /* [중요] 템플릿의 기본 그라데이션 배경을 무시하고, 
-     전체 페이지 배경색(#f0f8ff)과 동일하게 맞춰서 어색함 해결! */
-  background: #f0f8ff; 
+  padding: 50px 32px;  
+  background: #f0f8ff; /* 배경색 통일 */
   border: none;
 }
 
-/* 프로필 정보를 담고 있는 흰색 구름 카드 */
 .profile-card {
   display: flex;
   align-items: center;
-  gap: 30px; /* 요소 사이 간격 줄이기 */
+  gap: 30px;
   background-color: #ffffff;
-  /* 카드 내부 여백 줄여 '적당한' 크기로 만들기 */
   padding: 30px 50px; 
-  border-radius: 35px; /* 조금 더 부드러운 구름 느낌 */
+  border-radius: 35px;
   box-shadow: 0 12px 30px rgba(135, 206, 235, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* [수정] 아래 자기소개 섹션 가로 길이(780px)와 맞춤 */
+  max-width: 780px;
+  width: 100%;
+  
+  transition: transform 0.3s ease;
 }
 
-.profile-card:hover {
-  transform: translateY(-6px); /* 떠오르는 높이도 살짝 줄임 */
-  box-shadow: 0 18px 38px rgba(135, 206, 235, 0.32);
-}
-
-/* 프로필 이미지 (사진 크기 줄이기) */
 .profile-image {
-  /* 사진 크기를 180px -> 150px로 획기적으로 줄임 */
   width: 150px;
   height: 150px;
   border-radius: 50%; 
   background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-  border: 5px solid #ffffff; /* 테두리 두께 살짝 줄임 */
+  border: 5px solid #ffffff;
   box-shadow: 0 6px 15px rgba(0,0,0,0.07);
   overflow: hidden;
   flex-shrink: 0;
@@ -63,44 +52,64 @@ body {
   object-fit: cover;
 }
 
-/* 이름과 한줄소개 정보 영역 (이름 크기 줄이기) */
-.profile-info {
-  margin: 0;
-}
-
 .profile-info h1 {
   font-family: 'Jua', sans-serif;
-  /* 이름 폰트 크기를 3.2rem -> 2.6rem으로 줄여 적당히 강조 */
   font-size: 2.6rem;
   color: #0c4a6e; 
   margin-bottom: 6px;
 }
 
 .profile-info .tagline {
-  /* 한줄소개 폰트 크기 살짝 줄이기 */
   font-size: 1.1rem;
   color: #7dd3fc; 
   font-style: italic;
 }
 
-/* --- 3. 각 섹션 공통 스타일 (클래스 선택자: 기존 유지) --- */
+/* --- 3. 3D 입체 회전 효과 관련 CSS 추가 --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px; 
+  /* 부모 요소에 원근감 부여 */
+  perspective: 1000px; 
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 20px; 
+  cursor: pointer;
+  /* 3D 회전 설정 */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* 클릭 시 실행될 3D 회전 애니메이션 */
+@keyframes coin-flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); } /* 뒷면이 보이는 입체적 느낌 */
+  100% { transform: rotateY(360deg); } /* 다시 앞면 */
+}
+
+.flipping {
+  animation: coin-flip 0.7s ease-in-out;
+}
+
+/* --- 4. 기타 섹션 (기존 유지) --- */
 .content-section {
+  max-width: 780px; /* 가로 기준점 */
+  margin: 0 auto 40px auto;
   background-color: #ffffff;
   border-radius: 30px; 
-  box-shadow: 0 10px 25px rgba(135, 206, 235, 0.2); 
-  margin-bottom: 40px; 
   padding: 40px; 
+  box-shadow: 0 10px 25px rgba(135, 206, 235, 0.2); 
   border: 1px solid rgba(135, 206, 235, 0.3); 
 }
 
-/* --- 4. 기본 정보 섹션 (ID 선택자: 기존 유지) --- */
-#info {
-  position: relative;
-}
-
-#info h2 {
-  color: #0369a1; 
-}
+#info { position: relative; }
+#info h2 { color: #0369a1; }
 
 .info-table th {
   background-color: #f0f9ff; 
@@ -109,31 +118,6 @@ body {
   border-bottom: 2px solid #e0f2fe;
 }
 
-.info-table td {
-  border-bottom: 1px solid #f0f9ff;
-}
-
-/* --- 5. 갤러리 영역 (CSS Grid 활용: 기존 유지) --- */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px; 
-}
-
-.gallery-grid img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 20px; 
-  transition: transform 0.4s ease, box-shadow 0.4s ease; 
-}
-
-.gallery-grid img:hover {
-  transform: translateY(-8px) scale(1.05); 
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* --- 6. 포인트 컬러 및 기타 설정 --- */
 :root {
   --primary-color: #38bdf8; 
 }
