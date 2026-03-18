@@ -2,71 +2,90 @@
 @import "./common.css";
 @import "./wiki-layout.css";
 
+/* --- 1. 전체 배경 및 기본 폰트 (태그 선택자) --- */
 body {
   /* Haneul-haneul한 파스텔 하늘색 배경 */
   background-color: #f0f8ff; 
-  /* 둥글둥글한 느낌을 위해 폰트도 조금 더 부드럽게 */
+  /* 둥글둥글한 느낌을 위해 폰트 부드럽게 */
   font-family: 'Noto Sans KR', 'Jua', sans-serif;
   letter-spacing: -0.3px;
-  color: #444; /* 글씨색을 조금 더 부드러운 회색으로 */
+  color: #444; 
 }
 
-.content-section {
-  /* 흰색 배경, 아주 둥근 모서리, 부드러운 그림자로 뭉게구름 표현 */
+/* --- 2. 최상단 프로필 영역 (새로 추가된 뭉게구름 카드) --- */
+.hero#about {
+  display: flex;
+  justify-content: center;
+  padding: 60px 32px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
   background-color: #ffffff;
-  border-radius: 30px; /* 아주 둥글게 */
-  box-shadow: 0 10px 25px rgba(135, 206, 235, 0.2); /* 하늘색 톤의 부드러운 그림자 */
-  
-  /* 각 섹션 사이 간격을 넓혀 명확히 구분 */
-  margin-bottom: 40px; 
-  padding: 40px; /* 카드 내부 여백 넉넉히 */
-  border: 1px solid rgba(135, 206, 235, 0.3); /* 아주 연한 하늘색 테두리 */
+  padding: 40px 60px;
+  border-radius: 40px; /* 아주 둥근 구름 느낌 */
+  box-shadow: 0 15px 35px rgba(135, 206, 235, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#about {
-  /* 뭉게구름 카드와는 또 다른 느낌으로, 부드러운 그라데이션 적용 */
-  background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
-  border-radius: 30px;
-  margin-bottom: 40px;
-  padding: 40px;
-  border: none;
+.profile-card:hover {
+  transform: translateY(-8px); /* 마우스 올리면 둥실 떠오름 */
+  box-shadow: 0 20px 40px rgba(135, 206, 235, 0.35);
 }
 
-#about h2 {
+.profile-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%; /* 완벽한 원형 */
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+  border: 6px solid #ffffff; /* 흰색 테두리로 깔끔하게 */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-info h1 {
+  font-family: 'Jua', sans-serif;
+  font-size: 3.2rem;
   color: #0c4a6e; /* 깊은 하늘색 */
+  margin-bottom: 8px;
 }
 
+.profile-info .tagline {
+  font-size: 1.2rem;
+  color: #7dd3fc; /* 산뜻한 하늘색 포인트 */
+  font-style: italic;
+}
+
+/* --- 3. 각 섹션 공통 스타일 (클래스 선택자) --- */
+.content-section {
+  background-color: #ffffff;
+  border-radius: 30px; 
+  box-shadow: 0 10px 25px rgba(135, 206, 235, 0.2); 
+  margin-bottom: 40px; 
+  padding: 40px; 
+  border: 1px solid rgba(135, 206, 235, 0.3); 
+}
+
+/* --- 4. 기본 정보 섹션 (ID 선택자) --- */
 #info {
-  /* 뭉게구름 카드로 표현하여 자기소개와 확연히 구분 */
   position: relative;
 }
 
 #info h2 {
-  color: #0369a1; /* 파란색 계열 */
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px; /* 사진 사이 간격을 조금 더 띄워 여유롭게 */
-}
-
-.gallery-grid img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 20px; /* 더 둥글게 */
-  transition: transform 0.4s ease, box-shadow 0.4s ease; /* 더 부드럽게 */
-}
-
-.gallery-grid img:hover {
-  /* 마우스를 올리면 사진이 포근하게 떠오르는 느낌 */
-  transform: translateY(-8px) scale(1.05); /* 위로 떠오르며 확대 */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  color: #0369a1; 
 }
 
 .info-table th {
-  background-color: #f0f9ff; /* 아주 연한 하늘색 배경 */
+  background-color: #f0f9ff; 
   color: #0369a1;
   font-weight: 700;
   border-bottom: 2px solid #e0f2fe;
@@ -76,6 +95,27 @@ body {
   border-bottom: 1px solid #f0f9ff;
 }
 
+/* --- 5. 갤러리 영역 (CSS Grid 활용) --- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px; 
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 20px; 
+  transition: transform 0.4s ease, box-shadow 0.4s ease; 
+}
+
+.gallery-grid img:hover {
+  transform: translateY(-8px) scale(1.05); 
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 6. 포인트 컬러 및 기타 설정 --- */
 :root {
   --primary-color: #38bdf8; 
 }
