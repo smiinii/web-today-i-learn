@@ -2,39 +2,53 @@
 @import "./common.css";
 @import "./wiki-layout.css";
 
-/* --- 1. 전체 배경 및 기본 폰트 --- */
+/* --- 1. 전체 배경 및 기본 폰트 (태그 선택자) --- */
 body {
+  /* Haneul-haneul한 파스텔 하늘색 배경 */
   background-color: #f0f8ff; 
   font-family: 'Noto Sans KR', 'Jua', sans-serif;
   letter-spacing: -0.3px;
   color: #444; 
 }
 
-/* --- 2. 최상단 프로필 영역 (가로 길이 & 배경 최적화) --- */
+/* --- 2. 최상단 프로필 영역 (구름 크기 축소 및 중앙 정렬) --- */
+
+/* 프로필 히어로 전체 컨테이너 (.hero) */
 .hero {
   display: flex;
   justify-content: center;
   padding: 50px 32px;  
-  background: #f0f8ff; /* 배경색 통일 */
+  /* 템플릿 배경 무시하고 body와 통일 */
+  background: #f0f8ff; 
   border: none;
 }
 
+/* 프로필 정보를 담고 있는 흰색 구름 카드 */
 .profile-card {
   display: flex;
   align-items: center;
   gap: 30px;
   background-color: #ffffff;
   padding: 30px 50px; 
-  border-radius: 35px;
+  border-radius: 35px; /* 부드러운 구름 느낌 */
   box-shadow: 0 12px 30px rgba(135, 206, 235, 0.22);
   
-  /* [수정] 아래 자기소개 섹션 가로 길이(780px)와 맞춤 */
-  max-width: 780px;
+  /* [수정] 구름 크기를 다시 아담하게 줄이고(600px), 중앙 정렬 */
+  max-width: 600px;
   width: 100%;
+  margin: 0 auto; /* 부모(.hero)가 flex지만, 확실한 중앙 정렬을 위해 추가 */
   
-  transition: transform 0.3s ease;
+  /* 클릭 애니메이션과의 충돌을 방지하기 위해 
+     기존의 호버 transform 확대 효과는 제거하고 그림자만 남깁니다. */
+  transition: box-shadow 0.3s ease;
 }
 
+.profile-card:hover {
+  /* 마우스 올리면 포근하게 그림자만 강화 */
+  box-shadow: 0 18px 38px rgba(135, 206, 235, 0.32);
+}
+
+/* 프로필 이미지 (사진 크기 적당히) */
 .profile-image {
   width: 150px;
   height: 150px;
@@ -52,6 +66,11 @@ body {
   object-fit: cover;
 }
 
+/* 이름과 한줄소개 정보 영역 */
+.profile-info {
+  margin: 0;
+}
+
 .profile-info h1 {
   font-family: 'Jua', sans-serif;
   font-size: 2.6rem;
@@ -65,7 +84,7 @@ body {
   font-style: italic;
 }
 
-/* --- 3. 3D 입체 회전 효과 관련 CSS 추가 --- */
+/* --- 3. 3D 입체 회전 효과 관련 CSS (완벽한 회전 구현) --- */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -80,13 +99,25 @@ body {
   object-fit: cover;
   border-radius: 20px; 
   cursor: pointer;
+  
   /* 3D 회전 설정 */
   transform-style: preserve-3d;
-  backface-visibility: hidden;
+  backface-visibility: hidden; /* 뒷면 보일 때 앞면 숨김 */
+  
+  /* [중요] 부드러운 복귀를 위해 transition 유지하되, 
+     호버 transform 확대 효과는 끕니다. */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* 클릭 시 실행될 3D 회전 애니메이션 */
+/* [수정] 마우스를 올렸을 때 확대 효과가 3D 회전과 충돌하여 
+   사라지는 현상을 막기 위해 transform을 끕니다. 
+   대신 입체감을 위해 그림자만 강화합니다. */
+.gallery-grid img:hover {
+  transform: none; /* 확대 효과 제거 */
+  box-shadow: 0 15px 30px rgba(135, 206, 235, 0.3);
+}
+
+/* 클릭 시 실행될 3D 회전 애니메이션 (사라지지 않고 촤르르) */
 @keyframes coin-flip {
   0% { transform: rotateY(0deg); }
   50% { transform: rotateY(180deg); } /* 뒷면이 보이는 입체적 느낌 */
@@ -94,13 +125,14 @@ body {
 }
 
 .flipping {
-  animation: coin-flip 0.7s ease-in-out;
+  /* cubic-bezier를 사용하여 실제 동전처럼 묵직하게 뒤집히는 느낌 가미 */
+  animation: coin-flip 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- 4. 기타 섹션 (기존 유지) --- */
+/* --- 4. 기타 섹션 (클래스 및 ID 선택자 사용) --- */
 .content-section {
-  max-width: 780px; /* 가로 기준점 */
-  margin: 0 auto 40px auto;
+  max-width: 780px; /* 자기소개 칸 가로 기준점 */
+  margin: 0 auto 40px auto; /* 중앙 정렬 */
   background-color: #ffffff;
   border-radius: 30px; 
   padding: 40px; 
@@ -118,6 +150,7 @@ body {
   border-bottom: 2px solid #e0f2fe;
 }
 
+/* --- 5. 포인트 컬러 및 기타 설정 --- */
 :root {
   --primary-color: #38bdf8; 
 }
