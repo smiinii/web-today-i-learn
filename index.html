@@ -4,17 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <!-- TODO: Open Graph 메타 태그를 설정하세요 -->
-    <!-- <meta property="og:title" content="페이지 제목" /> -->
-    <!-- <meta property="og:description" content="페이지 설명" /> -->
-    <!-- <meta property="og:image" content="./images/thumbnail.jpg" /> -->
+    <meta property="og:title" content="루크의 ON/OFF 라이프" />
+    <meta property="og:description" content="코딩도, 노는 것도 100% 진심인 예비 개발자의 기록입니다." />
+    <meta property="og:image" content="./images/12.jpeg" />
 
-    <title>Today I Learn</title>
+    <title>루크의 마이페이지</title>
     <link rel="stylesheet" href="./css/main.css" />
     <script src="./js/index.js" defer></script>
   </head>
   <body>
-    <!-- 상단 내비게이션 -->
     <nav class="top-nav">
       <span class="nav-logo">My Page</span>
       <ul class="nav-links">
@@ -25,11 +23,9 @@
       </ul>
     </nav>
 
-    <!-- 프로필 히어로 -->
     <section class="hero" id="about">
       <div class="profile-card">
         <div class="profile-image">
-          <!-- TODO: 프로필 이미지를 넣어주세요 -->
           <img src="./images/me.png" alt="프로필 사진" />
         </div>
         <div class="profile-info">
@@ -40,7 +36,6 @@
     </section>
 
     <main>
-      <!-- 자기소개 -->
       <section class="content-section">
         <h2>자기소개</h2>
         <p>
@@ -54,10 +49,8 @@
         </p>
       </section>
 
-      <!-- 기본 정보 -->
       <section class="content-section" id="info">
         <h2>기본 정보</h2>
-        <!-- TODO: 자신의 기본 정보를 표(<table>)로 정리하세요 -->
         <table class="info-table">
           <tr>
             <th>이름</th>
@@ -78,7 +71,6 @@
         </table>
       </section>
 
-      <!-- 나만의 갤러리 -->
       <section class="content-section" id="gallery">
         <h2>개발자의 OFF 라이프</h2>
         <p class="section-desc">코딩도, 노는 것도 100% 진심인 순간들</p>
@@ -97,14 +89,13 @@
         </div>
       </section>
 
-      <!-- 나를 울린 인생 작품 -->
       <section class="content-section" id="works">
         <h2>나를 울린 인생 작품</h2>
-        <div class="works-list">
+        <ul class="works-list">
           <li>
             <article class="work-card">
               <div class="work-thumbnail">
-                <iframe width="100%" height="200" src="https://www.youtube.com/watch?v=IIHQ1Z2yu80" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/IIHQ1Z2yu80" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
               </div>
               <div class="work-info">
                 <h3>드라마: 이 사랑 통역되나요?</h3>
@@ -124,15 +115,13 @@
               </div>
             </article>
           </li>
-        </div>
+        </ul>
       </section>
 
-      <!-- TIL (Today I Learned) -->
       <section class="content-section" id="til">
         <h2>TIL</h2>
         <p class="section-desc">오늘 새롭게 배운 것들을 기록합니다.</p>
 
-        <!-- TIL 작성 폼 -->
         <form class="til-form" id="til-form">
           <div class="form-group">
             <label for="til-date">날짜</label>
@@ -152,9 +141,7 @@
           </div>
         </form>
 
-        <!-- TIL 목록: 폼으로 등록하면 여기에 항목이 추가됩니다 -->
         <div class="til-list" id="til-list">
-          <!-- 아래는 예시 항목입니다. 자유롭게 수정하거나 삭제하세요 -->
           <article class="til-item">
             <time>2026-03-15</time>
             <h3>HTML 시멘틱 태그</h3>
