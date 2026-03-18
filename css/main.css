@@ -11,7 +11,7 @@ body {
   color: #444; 
 }
 
-/* --- 2. 최상단 프로필 영역 (크기 줄이기 & 배경색 해결) --- */
+/* --- 2. 최상단 프로필 영역 (가로 길이 늘리기) --- */
 
 /* 프로필 히어로 전체 컨테이너 (.hero) */
 .hero {
@@ -37,6 +37,11 @@ body {
   border-radius: 35px; /* 조금 더 부드러운 구름 느낌 */
   box-shadow: 0 12px 30px rgba(135, 206, 235, 0.22);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  /* [중요] 템플릿의 기본 스타일(max-width: 600px;)을 무시하고,
+     가로 길이를 자기소개 카드와 동일하게(780px) 설정해서 어색함 해결! */
+  max-width: 780px;
+  width: 100%;
 }
 
 .profile-card:hover {
